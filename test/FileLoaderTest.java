@@ -34,7 +34,7 @@ public class FileLoaderTest {
 		}
 		
 		// Check the singleton for records
-		ArrayList<String> first = planes.getFirst();
+		ArrayList<String> first = planes.getRecord(0);
 		assertEquals("CSTNA", first.get(0));
 	}
 	
@@ -52,7 +52,7 @@ public class FileLoaderTest {
 		}
 		
 		// Check the singleton for records
-		ArrayList<String> first = airports.getFirst();
+		ArrayList<String> first = airports.getRecord(0);
 		assertEquals("AMS", first.get(0));
 	}
 	

@@ -3,17 +3,19 @@
  */
 package controller;
 
-import java.util.ArrayList;
-
 /**
  * @author joao
  *
  */
-public class Airports implements Entity {
+public class Airports extends TailContainer {
+	
+	private static final int IATA_CODE = 0;
+	private static final int NB_LANDING_COST_PER_LANDING = 1;
+	private static final int NB_DAILY_PARKING_COST = 2;
+	private static final int WB_LANDING_COST_PER_LANDING = 3;
+	private static final int WB_DAILY_PARKING_COST = 4;
 
 	private static Airports instance;
-	ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
-	
 	
 	private Airports() {
 		
@@ -26,22 +28,24 @@ public class Airports implements Entity {
 		return instance;
 	}
 
-	/* (non-Javadoc)
-	 * @see controller.Entity#addRecord(java.util.ArrayList)
-	 */
-	@Override
-	public <T> boolean addRecord(ArrayList<T> arr) {
-		records.add((ArrayList<String>)arr);
-		return false;
+	public String getIataCode(int index) {
+		return records.get(index).get(IATA_CODE);
 	}
 
-	/* (non-Javadoc)
-	 * @see controller.Entity#getFirst()
-	 */
-	@Override
-	public <T> T getFirst() {
-		// TODO Auto-generated method stub
-		return (T)records.get(0);
+	public String getNbLandingCostPerLanding(int index) {
+		return records.get(index).get(NB_LANDING_COST_PER_LANDING);
+	}
+
+	public String getNbDailyParkingCost(int index) {
+		return records.get(index).get(NB_DAILY_PARKING_COST);
+	}
+
+	public String getWbLandingCostPerLanding(int index) {
+		return records.get(index).get(WB_LANDING_COST_PER_LANDING);
+	}
+
+	public String getWbDailyParkingCost(int index) {
+		return records.get(index).get(WB_DAILY_PARKING_COST);
 	}
 
 }

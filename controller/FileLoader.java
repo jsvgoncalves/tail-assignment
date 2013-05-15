@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -22,7 +21,7 @@ public class FileLoader {
 		}
 	}
 	
-	public static boolean loadCSV(String fileName, Entity entity) throws IOException{
+	public static boolean loadCSV(String fileName, Recordible entity) throws IOException{
 		Path path = Paths.get(fileName);
 		Scanner sc = new Scanner(path);
 		if(sc.hasNextLine()) {
