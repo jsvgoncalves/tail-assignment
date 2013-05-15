@@ -1,28 +1,47 @@
 package controller;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileLoader {
 	
 	public static void main(String[] args){
-		loadCSV("avioes.csv", null);
+		try {
+			loadCSV("airplanes.csv", Planes.getPlanes());
+			loadCSV("airports.csv", Airports.getAirports());
+		} catch (NoSuchFileException e1) {
+			System.err.println("File not found: " + e1.getMessage());
+		} catch (IOException e2) {
+			System.err.println("Something really bad happened.");
+		}
 	}
 	
-	public static boolean loadCSV(String fileName, Object obj){
-		System.out.println("Reading");
+	public static boolean loadCSV(String fileName, Entity entity) throws IOException{
 		Path path = Paths.get(fileName);
-		try(Scanner sc = new Scanner(path)){
-			while(sc.hasNextLine()){
-				System.out.println("Read: " + sc.nextLine());
-			}
-		} catch(Exception e){
-			System.err.println("Won't read: " + e.getMessage());
+		Scanner sc = new Scanner(path);
+		if(sc.hasNextLine()) {
+			sc.nextLine();
 		}
-		
-		return false;
+		while(sc.hasNextLine()){
+			// Use split to get the values into an array
+			String[] fields = sc.nextLine().split(",");
+			// TODO Check for consistency
+			if (fields.length > 1) {
+				// Convert to ArrayList<String> to use Entity interface
+				ArrayList<String> arr = new ArrayList<String>(Arrays.asList(fields));
+				entity.addRecord(arr);
+			} else {
+				//throw new FileNotFoundException("Error parsing CSV.");
+			}
+		}
+		sc.close();
+		return true;
 	}
 
 }
