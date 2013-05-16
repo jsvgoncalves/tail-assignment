@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.Airports;
+import controller.Airport;
 import controller.FileLoader;
-import controller.Planes;
+import controller.Plane;
+import controller.TailContainer;
 
 public class FileLoaderTest {
 
@@ -22,7 +23,7 @@ public class FileLoaderTest {
 
 	@Test
 	public void testPlanes() {
-		Planes planes = Planes.getPlanes();
+		TailContainer<Plane> planes = new TailContainer<Plane>();
 		
 		// Load the file avioes.csv
 		String fileName = "airplanes.csv";
@@ -40,7 +41,7 @@ public class FileLoaderTest {
 	
 	@Test //(expected=Exception.class)
 	public void testAirports() {
-		Airports airports = Airports.getAirports();
+		TailContainer<Airport> airports = new TailContainer<Airport>();
 		
 		// Load the file airports.csv
 		String fileName = "airports.csv";
@@ -58,7 +59,7 @@ public class FileLoaderTest {
 	
 	@Test(expected=NoSuchFileException.class)
 	public void testFileNotFound() throws IOException {
-		Airports airports = Airports.getAirports();
+		TailContainer<Airport> airports = new TailContainer<Airport>();
 		String fileName = "idonthinkthereforeidontexist.csv";
 		FileLoader.loadCSV(fileName, airports);
 	}

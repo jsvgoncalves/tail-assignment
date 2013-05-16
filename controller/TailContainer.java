@@ -9,14 +9,20 @@ import java.util.ArrayList;
  * @author joao
  *
  */
-public class TailContainer implements Recordible{
+public class TailContainer<T> implements Recordible{
 	
-	ArrayList<ArrayList<String>> records = new ArrayList<ArrayList<String>>();
+	private ArrayList<T> records = new ArrayList<T>();
+
+	private boolean order() {
+		// TODO Auto-generated method stub
+		// quicksort
+		return true;
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> boolean addRecord(ArrayList<T> arr) {
-		records.add((ArrayList<String>) arr);
+	public <E> boolean addRecord(E arr) {
+		records.add((T) arr);
 		return true;
 	}
 

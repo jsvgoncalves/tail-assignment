@@ -11,14 +11,20 @@ import java.util.Scanner;
 public class FileLoader {
 	
 	public static void main(String[] args){
+		TailContainer<Plane> planes = new TailContainer<Plane>();
+		TailContainer<Airport> airports = new TailContainer<Airport>();
+		TailContainer<Flight> flights = new TailContainer<Flight>();
+		
 		try {
-			loadCSV("airplanes.csv", Planes.getPlanes());
-			loadCSV("airports.csv", Airports.getAirports());
+			loadCSV("airplanes.csv", planes);
+			loadCSV("airports.csv", airports);
 		} catch (NoSuchFileException e1) {
 			System.err.println("File not found: " + e1.getMessage());
 		} catch (IOException e2) {
 			System.err.println("Something really bad happened.");
 		}
+		
+		
 	}
 	
 	public static boolean loadCSV(String fileName, Recordible entity) throws IOException{
