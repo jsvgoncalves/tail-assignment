@@ -1,9 +1,15 @@
 package controller;
 
-public class Flight<E> implements Comparable<Flight>{
+public class Flight implements Comparable<Flight>{
 	public int number;
-	public int dept;
-	public int arrv;
+	/**
+	 * Departure airport.
+	 */
+	public Airport dept;
+	/**
+	 * Destination airport.
+	 */
+	public Airport arrv;
 	public int planeType;
 	public int deptTime;
 	public int arrvTime;
@@ -35,28 +41,28 @@ public class Flight<E> implements Comparable<Flight>{
 	/**
 	 * @return the dept
 	 */
-	public int getDept() {
+	public Airport getDept() {
 		return dept;
 	}
 
 	/**
 	 * @param dept the dept to set
 	 */
-	public void setDept(int dept) {
+	public void setDept(Airport dept) {
 		this.dept = dept;
 	}
 
 	/**
 	 * @return the arrv
 	 */
-	public int getArrv() {
+	public Airport getArrv() {
 		return arrv;
 	}
 
 	/**
 	 * @param arrv the arrv to set
 	 */
-	public void setArrv(int arrv) {
+	public void setArrv(Airport arrv) {
 		this.arrv = arrv;
 	}
 
@@ -156,6 +162,11 @@ public class Flight<E> implements Comparable<Flight>{
 	 */
 	public void setSoldEco(int soldEco) {
 		this.soldEco = soldEco;
+	}
+
+	public boolean isMaintenance() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

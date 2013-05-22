@@ -9,26 +9,23 @@ import java.util.ArrayList;
  * @author joao
  *
  */
-public class TailContainer<T> implements Recordible{
+public class TailContainer<T> extends ArrayList<T>{
 	
-	private ArrayList<T> records = new ArrayList<T>();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9205192177580779579L;
+	//private ArrayList<T> records = new ArrayList<T>();
 
-	private boolean order() {
+	public boolean order() {
 		// TODO Auto-generated method stub
 		// quicksort
 		return true;
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <E> boolean addRecord(E arr) {
-		records.add((T) arr);
-		return true;
+
+	public void add(ArrayList<String> arr) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T getRecord(int index) {
-		return (T)records.get(index);
-	}
 }

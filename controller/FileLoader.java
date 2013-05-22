@@ -27,7 +27,7 @@ public class FileLoader {
 		
 	}
 	
-	public static boolean loadCSV(String fileName, Recordible entity) throws IOException{
+	public static <T> boolean loadCSV(String fileName, TailContainer<T> entity) throws IOException{
 		Path path = Paths.get(fileName);
 		Scanner sc = new Scanner(path);
 		if(sc.hasNextLine()) {
@@ -40,7 +40,7 @@ public class FileLoader {
 			if (fields.length > 1) {
 				// Convert to ArrayList<String> to use Entity interface
 				ArrayList<String> arr = new ArrayList<String>(Arrays.asList(fields));
-				entity.addRecord(arr);
+				entity.add(arr);
 			} else {
 				//throw new FileNotFoundException("Error parsing CSV.");
 			}
