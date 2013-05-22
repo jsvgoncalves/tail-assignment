@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,8 +33,9 @@ public class FileLoaderTest {
 		}
 		
 		// Check the singleton for records
-		ArrayList<String> first = planes.getRecord(0);
-		assertEquals("CSTNA", first.get(0));
+		Plane first = planes.get(0);
+		assertEquals("CSTNA", first.getName());
+		//assertEquals("CSTNA", first.get(0));
 	}
 	
 	@Test //(expected=Exception.class)
@@ -53,8 +52,9 @@ public class FileLoaderTest {
 		}
 		
 		// Check the singleton for records
-		ArrayList<String> first = airports.getRecord(0);
-		assertEquals("AMS", first.get(0));
+		Airport first = airports.get(0);
+		assertEquals("AMS", first.getIataCode());
+		//assertEquals("AMS", first.get(0));
 	}
 	
 	@Test(expected=NoSuchFileException.class)
