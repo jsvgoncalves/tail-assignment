@@ -15,8 +15,27 @@ public class Flight implements Comparable<Flight>{
 	public int arrvTime;
 	public int seatsExc;
 	public int seatsEco;
-	public int oldExc;
+	public int soldExc;
 	public int soldEco;
+	
+	private Flight() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Flight(int flightNo, Airport dept, Airport arrv, 
+			int planeType, int deptTime, int arrvTime,
+			int seatsExc, int seatsEco, int soldExc, int soldEco) {
+		this.number = flightNo;
+		this.dept = dept;
+		this.arrv = arrv;
+		this.planeType = planeType;
+		this.deptTime = deptTime;
+		this.arrvTime = arrvTime;
+		this.seatsExc = seatsExc;
+		this.seatsEco = seatsEco;
+		this.soldExc = soldExc;
+		this.soldEco = soldEco;
+	}
 
 	@Override
 	public int compareTo(Flight flight) {
@@ -139,15 +158,15 @@ public class Flight implements Comparable<Flight>{
 	/**
 	 * @return the oldExc
 	 */
-	public int getOldExc() {
-		return oldExc;
+	public int getSoldExc() {
+		return soldExc;
 	}
 
 	/**
 	 * @param oldExc the oldExc to set
 	 */
-	public void setOldExc(int oldExc) {
-		this.oldExc = oldExc;
+	public void setSoldExc(int oldExc) {
+		this.soldExc = oldExc;
 	}
 
 	/**

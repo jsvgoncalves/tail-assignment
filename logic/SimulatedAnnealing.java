@@ -61,7 +61,7 @@ public class SimulatedAnnealing {
 		}
 	}
 
-	private double probability(double t, double cost, double newCost) {
+	private static double probability(double t, double cost, double newCost) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -72,8 +72,7 @@ public class SimulatedAnnealing {
 	 * @param sol
 	 * @return
 	 */
-	private TailContainer<Plane> swap(TailContainer<Plane> state) {
-		// TODO Auto-generated method stub
+	public static TailContainer<Plane> swap(TailContainer<Plane> state) {
 		return null;
 	}
 
@@ -85,15 +84,15 @@ public class SimulatedAnnealing {
 	 * @param iMax
 	 * @return
 	 */
-	private double temperature(int i, int iMax) {
+	private static double temperature(int i, int iMax) {
 		return iMax/i;
 	}
 
-	private double cost(TailContainer<Plane> sol) {
+	private static double cost(TailContainer<Plane> sol) {
 		double cost = 0;
 		
 		for (int i = 0; i < sol.size(); i++) {
-			sol.get(i).getCost();
+			((Plane)sol.getRecord(i)).getCost();
 		}
 		
 		return cost;

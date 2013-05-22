@@ -40,7 +40,7 @@ public class FileLoader {
 			if (fields.length > 1) {
 				// Convert to ArrayList<String> to use Entity interface
 				ArrayList<String> arr = new ArrayList<String>(Arrays.asList(fields));
-				entity.add(arr);
+				entity.addRecord(arr);
 			} else {
 				//throw new FileNotFoundException("Error parsing CSV.");
 			}

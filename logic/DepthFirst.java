@@ -39,7 +39,7 @@ public class DepthFirst {
 			if(!schedule.isEmpty()){
 				// Partial solution found.
 				// Now add this flight to partial solution
-				schedule.get(schedule.lastIndexOf(plane)).update(fligths.get(flightID));
+				((Plane) schedule.getLast()).update(fligths.get(flightID));
 				return schedule;
 			}
 		}
@@ -51,9 +51,9 @@ public class DepthFirst {
 	private ArrayList<Plane> getAvailablePlanes(int flightID, TailContainer<Plane> planes){
 		ArrayList<Plane> availPlanes = new ArrayList<Plane>();
 		
-		for (Plane plane : planes) {
+		for (Plane plane : planes.getRecords()) {
 			if(plane.canPerform(fligths.get(flightID))){
-				
+				//TODO: this is not done.
 			}
 		}
 		

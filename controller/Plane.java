@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import util.Constraints;
+
 public class Plane {
 	
 	private static final int MINUTES_IN_A_DAY = 1440;
@@ -17,7 +19,7 @@ public class Plane {
 	
 	/** Maintenance cost of the airplane per minute. */
 	private double maintAvgCostMin;
-	private double maintAvgCostTotal;
+	private double maintAvgCostTotal = 0;
 	
 	/** Average fuel spending per minute */
 	private double fuelAvgCostMin;
@@ -37,7 +39,16 @@ public class Plane {
 	 * the period between flights */
 	private int totalFlyingTime = 0;
 	
+	public Plane(String plate, String name, String type) {
+		this.plate = plate;
+		this.name = name;
+		this.type = type;
+		schedule = new ArrayList<Flight>();
+	}
 	
+	private Plane() {
+		// TODO Auto-generated method stub
+	}
 	
 	/**
 	 * @return the plate
@@ -117,6 +128,14 @@ public class Plane {
 	public void setFuelAvgCostMin(String fuelAvgCostMin) {
 		this.fuelAvgCostMin = Integer.valueOf(fuelAvgCostMin);
 	}
+	
+	public ArrayList<Flight> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(ArrayList<Flight> schedule) {
+		this.schedule = schedule;
+	}
 //	/**
 //	 * @return the location
 //	 */
@@ -142,8 +161,12 @@ public class Plane {
 		if(f.isMaintenance()){
 			timeSinceLastMaint = 0;
 			maintAvgCostTotal += f.getArrvTime() - f.getDeptTime();
+		} else if(schedule.isEmpty()){
+			int addedMinutes = f.getArrvTime() - f.getArrvTime();
+			timeSinceLastMaint += addedMinutes;
+			totalFlyingTime += f.getArrvTime() - f.getDeptTime();
 		} else {
-			int addedMinutes = f.getArrvTime() - schedule.get(schedule.size()).getArrvTime();
+			int addedMinutes = f.getArrvTime() - schedule.get(schedule.size()-1).getArrvTime();
 			timeSinceLastMaint += addedMinutes;
 			totalFlyingTime += f.getArrvTime() - f.getDeptTime();
 		}
