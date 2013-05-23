@@ -18,9 +18,10 @@ public class Flight implements Comparable<Flight>{
 	public int soldExc;
 	public int soldEco;
 	
-	private Flight() {
-		// TODO Auto-generated constructor stub
-	}
+	public boolean isMaintenance = false;
+	
+//	private Flight() {
+//	}
 	
 	public Flight(int flightNo, Airport dept, Airport arrv, 
 			int planeType, int deptTime, int arrvTime,
@@ -39,8 +40,10 @@ public class Flight implements Comparable<Flight>{
 
 	@Override
 	public int compareTo(Flight flight) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (this.deptTime == flight.deptTime){
+			return this.arrvTime - flight.arrvTime;
+		}
+		return this.deptTime - flight.deptTime;
 	}
 
 	/**
@@ -184,8 +187,7 @@ public class Flight implements Comparable<Flight>{
 	}
 
 	public boolean isMaintenance() {
-		// TODO Auto-generated method stub
-		return false;
+		return isMaintenance;
 	}
 	
 	
