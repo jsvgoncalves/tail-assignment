@@ -20,13 +20,15 @@ public class Main {
 		TailContainer<Airport> airports = new TailContainer<Airport>();
 		ArrayList<String> params = new ArrayList<String>();
 		
+		
 		DepthFirst df = new DepthFirst(flights);
 		TailContainer<Plane> firstSol = df.dfRecursive(planes);
 		
 		int maxIterations = 5;
 		double maxCost = 1.0;
 		
-		SimulatedAnnealing sa = new SimulatedAnnealing(flights, planes, airports, params);
+//		SimulatedAnnealing sa = new SimulatedAnnealing(flights, planes, airports, params);
+		SimulatedAnnealing sa = new SimulatedAnnealing();
 		sa.run(firstSol, maxIterations, maxCost);
 	}
 

@@ -4,6 +4,8 @@
 
 package controller;
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 /**
  * @author joao
@@ -12,9 +14,24 @@ import java.util.ArrayList;
  public class TailContainer<T> implements Recordible{
 
 	private ArrayList<T> records = new ArrayList<T>();
-	private boolean order() {
+	
+	public TailContainer(TailContainer<T> state) {
+		records = new ArrayList<T>(state.getRecords());
+	}
+
+	public TailContainer() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * Sorts the list, if sortable.
+	 * @return True after list is sorted; False if unsortable.
+	 */
+	@SuppressWarnings("unchecked")
+	public <E extends Comparable<E>> boolean sort() {
 		// TODO Auto-generated method stub
 		// quicksort
+		Collections.sort((ArrayList<E>) records);
 		return true;
 	}
 
