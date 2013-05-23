@@ -46,9 +46,9 @@ public class Plane {
 		schedule = new ArrayList<Flight>();
 	}
 	
-	private Plane() {
-		// TODO Auto-generated method stub
-	}
+//	private Plane() {
+//		schedule = new ArrayList<Flight>(0);
+//	}
 	
 	/**
 	 * @return the plate
@@ -177,6 +177,10 @@ public class Plane {
 		return getFuelCost() + getMaintCost() + getAirportCosts();
 	}
 	
+	/**
+	 * @return The total cost of airport fees (parking, landing, overflight)
+	 * from the schedule of this airplane.
+	 */
 	private double getAirportCosts() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -190,6 +194,24 @@ public class Plane {
 		schedule.get(schedule.size()).arrvTime + Constraints.MIN_PARKING_TIME < flight.deptTime
 		&& schedule.get(schedule.size()).arrv.equals(flight.arrv)
 		&& timeSinceLastMaint < Constraints.MAX_TIME_NO_MAINT * MINUTES_IN_A_DAY;
+	}
+
+	/**
+	 * Compares flight with Index1 of this plane and flight with Index2
+	 * of plane "p" and returns whether they are interchangeable, i.e.
+	 * is both planes are on the same airport at the same time and can swap
+	 * schedules at that time.
+	 * @param p
+	 * @param flightIndex1
+	 * @param flightIndex2
+	 * @return True if schedules are interchangeable at index1
+	 * of this.schedule and index2 of p.schedule
+	 */
+	public boolean compareTo(Plane p, int flightIndex1, int flightIndex2) {
+		return schedule.get(flightIndex1).getDept()
+				== p.schedule.get(flightIndex2).getDept()
+			&& schedule.get(flightIndex1).getDeptTime() - Constraints.MIN_PARKING_TIME
+				> p.schedule.get(flightIndex2 - 1).getDeptTime();
 	}
 	
 	
