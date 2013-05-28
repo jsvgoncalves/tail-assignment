@@ -221,9 +221,9 @@ public class Plane {
 	}
 	
 	public boolean canPerform(Flight flight) {
-		return 
-		schedule.get(schedule.size()).arrvTime + Constraints.MIN_PARKING_TIME < flight.deptTime
-		&& schedule.get(schedule.size()).arrv.equals(flight.arrv)
+		return schedule.isEmpty() ||  
+		schedule.get(schedule.size()-1).arrvTime + Constraints.MIN_PARKING_TIME < flight.deptTime
+		&& schedule.get(schedule.size()-1).arrv == flight.dept
 		&& timeSinceLastMaint < Constraints.MAX_TIME_NO_MAINT * MINUTES_IN_A_DAY;
 	}
 

@@ -56,9 +56,8 @@ public class FileLoaderTest {
 	
 	@Test(expected=NoSuchFileException.class)
 	public void testFileNotFound() throws IOException {
-		TailContainer<Airport> airports = new TailContainer<Airport>();
 		String fileName = "idonthinkthereforeidontexist.csv";
-		airports = FileLoader.loadAirpors(fileName);
+		FileLoader.loadAirpors(fileName);
 	}
 	
 
