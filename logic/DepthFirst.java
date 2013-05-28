@@ -11,10 +11,10 @@ import controller.*;
  */
 public class DepthFirst {
 	
-	private TailContainer<Flight> fligths;
+	private TailContainer<Flight> flights;
 	
-	public DepthFirst(TailContainer<Flight> fligths) {
-		this.fligths = fligths;
+	public DepthFirst(TailContainer<Flight> flights) {
+		this.flights = flights;
 	}
 	
 	public TailContainer<Plane> dfRecursive(TailContainer<Plane> planes){
@@ -34,17 +34,25 @@ public class DepthFirst {
 
 		// Create new search "branches". Stop if any branch found a solution:
 		for (Plane plane : availablePlanes) {
-			plane.update((Flight) fligths.get(flightID));
+			plane.update((Flight) flights.get(flightID));
+			if(flightID == flights.size() - 1){
+				// If this is the last tree level (last flight), then solution WAS FOUND
+				TailContainer<Plane> schedule = new TailContainer<Plane>();
+				schedule.addRecord(plane);
+				return schedule;
+			}
+			
+			// Still not the last plane. We need to go deeper:
 			TailContainer<Plane> schedule = dfRecursive(flightID + 1, planes);
 			if(!schedule.isEmpty()){
 				// Partial solution found.
 				// Now add this flight to partial solution
-				((Plane) schedule.getLast()).update(fligths.get(flightID));
+				((Plane) schedule.getLast()).update(flights.get(flightID));
 				return schedule;
 			}
 		}
 
-		// Reaching here means solution was found in no search branches.
+		// Reaching here means no solution was found in search branches.
 		return new TailContainer<Plane>();
 	}
 
@@ -52,8 +60,9 @@ public class DepthFirst {
 		ArrayList<Plane> availPlanes = new ArrayList<Plane>();
 		
 		for (Plane plane : planes.getRecords()) {
-			if(plane.canPerform(fligths.get(flightID))){
-				//TODO: this is not done.
+			if(plane.canPerform(flights.get(flightID))){
+				availPlanes.add(plane);
+				System.err.println("getAvailablePlanes");
 			}
 		}
 		
