@@ -44,6 +44,24 @@ public class Plane {
 		this.type = type;
 		schedule = new ArrayList<Flight>();
 	}
+	
+	/**
+	 * Matricula
+	 * Nome
+	 * Tipo_Aviao
+	 * ATC_AVG_COST_DAY
+	 * MAINT_AVG_COST_MIN
+	 * FUEL_AVG_COST_MIN
+	 * @param arr
+	 */
+	public Plane(ArrayList<String> arr) {
+		this.plate = arr.get(0);
+		this.name = arr.get(1);
+		this.type = arr.get(2);
+		this.maintAvgCostMin = Double.valueOf(arr.get(3));
+		this.fuelAvgCostMin = Double.valueOf(arr.get(4));
+		schedule = new ArrayList<Flight>();
+	}
 
 	private double maintCostTotal;
 

@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 
 import controller.Airport;
+import controller.FileLoader;
 import controller.Flight;
 import controller.Plane;
 import controller.TailContainer;
@@ -23,9 +24,14 @@ public class Main {
 		
 		DepthFirst df = new DepthFirst(flights);
 		TailContainer<Plane> firstSol = df.dfRecursive(planes);
+		for (int i = 0; i < firstSol.size(); i++) {
+			System.out.println(firstSol.get(i).toString());
+		}
 		
 		int maxIterations = 5;
-		double maxCost = 1.0;
+		double maxCost = 100.0;
+		
+		FileLoader.loadFiles(planes, airports, flights);
 		
 //		SimulatedAnnealing sa = new SimulatedAnnealing(flights, planes, airports, params);
 		SimulatedAnnealing sa = new SimulatedAnnealing();

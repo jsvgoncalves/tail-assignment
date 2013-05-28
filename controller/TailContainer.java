@@ -35,18 +35,6 @@ import java.util.Collections;
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <E> boolean addRecord(E arr) {
-		records.add((T) arr);
-		return true;
-	}
-	@SuppressWarnings("unchecked")
-	@Override
-	public T getRecord(int index) {
-		return (T)records.get(index);
-	}
-
 	public int size() {
 		return records.size();
 	}
@@ -59,11 +47,20 @@ import java.util.Collections;
 		return records.get(size()-1);
 	}
 
-	public T get(int index) {
-		return records.get(index);
-	}
-
 	public ArrayList<T> getRecords() {
 		return records;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <E> boolean addRecord(E arr) {
+		records.add((T) arr);
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public T get(int index) {
+		return (T) records.get(index);
 	}
 }

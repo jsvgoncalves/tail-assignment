@@ -29,7 +29,7 @@ public class SimulatedAnnealing {
 	public void run(TailContainer<Plane> firstSol, int iMax, double cMax) {
 		TailContainer<Plane> sol = firstSol; // current solution
 		double cost = cost(sol); //cost of the current solution
-
+		System.err.println("imax = " + iMax + " cmax = " + cMax + "§ cost = " + cost);
 		int i = 0;
 
 		// Will stop after i_max iterations
@@ -38,6 +38,7 @@ public class SimulatedAnnealing {
 		while (i < iMax && cost > cMax){
 			// Swap some two planes' flights schedule to
 			//  generate a new schedule:
+			System.err.println("sa: " + i + " " + cost + "§");
 			TailContainer<Plane> newSol = swap(sol);
 			double newCost = cost(newSol);
 
@@ -133,7 +134,7 @@ public class SimulatedAnnealing {
 		double cost = 0;
 
 		for (int i = 0; i < sol.size(); i++) {
-			((Plane)sol.getRecord(i)).getCost();
+			((Plane)sol.get(i)).getCost();
 		}
 
 		return cost;

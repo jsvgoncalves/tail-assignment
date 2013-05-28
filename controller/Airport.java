@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 public class Airport {
 	
 	private String iataCode;
@@ -7,8 +9,6 @@ public class Airport {
 	private double nbDailyParkingCost;
 	private double wbLandingCostPerLanding;
 	private double wbDailyParkingCost;
-	
-	private Airport(){};
 	
 	public Airport(String iataCode, double nbLandingCostPerLanding,
 			double nbDailyParkingCost, double wbLandingCostPerLanding,
@@ -20,6 +20,22 @@ public class Airport {
 		this.wbDailyParkingCost = wbDailyParkingCost;
 	}
 	
+	/**
+	 * IATA_CODE
+	 * NB_LANDING_COST_PER_LANDING
+	 * NB_DAILY_PARKING_COST
+	 * WB_LANDING_COST_PER_LANDING
+	 * WB_DAILY_PARKING_COST
+	 * @param arr
+	 */
+	public Airport(ArrayList<String> arr) {
+		this.iataCode = arr.get(0);
+		this.nbLandingCostPerLanding = Double.valueOf(arr.get(1));
+		this.nbDailyParkingCost = Double.valueOf(arr.get(2));
+		this.wbLandingCostPerLanding = Double.valueOf(arr.get(3));
+		this.wbDailyParkingCost = Double.valueOf(arr.get(4));
+	}
+
 	/**
 	 * @return the iataCode
 	 */

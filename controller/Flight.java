@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 public class Flight implements Comparable<Flight>{
 	public int number;
 	/**
@@ -36,6 +38,37 @@ public class Flight implements Comparable<Flight>{
 		this.seatsEco = seatsEco;
 		this.soldExc = soldExc;
 		this.soldEco = soldEco;
+	}
+
+	/**
+	 * Voo
+	 * Origem
+	 * Destino
+	 * Tipo_Aviao
+	 * Partida
+	 * Chegada
+	 * Lugares_Executiva
+	 * Lugares_Economica
+	 * Lugares_Exec_Vendidos
+	 * Lugares_Econ_Vendidos
+	 * @param arr
+	 */
+	public Flight(ArrayList<String> arr, TailContainer<Airport> airports) {
+		this.number = Integer.valueOf(arr.get(0));
+		for (Airport airport: airports.getRecords()) {
+			if (arr.get(1).equals(airport.getIataCode())) {
+				this.dept = airport;
+			} else if (arr.get(2).equals(airport.getIataCode())) {
+				this.arrv = airport;
+			}
+		}
+		this.planeType = Integer.valueOf(arr.get(0));
+		this.deptTime = Integer.valueOf(arr.get(0));
+		this.arrvTime = Integer.valueOf(arr.get(0));
+		this.seatsExc = Integer.valueOf(arr.get(0));
+		this.seatsEco = Integer.valueOf(arr.get(0));
+		this.soldExc = Integer.valueOf(arr.get(0));
+		this.soldEco = Integer.valueOf(arr.get(0));
 	}
 
 	@Override

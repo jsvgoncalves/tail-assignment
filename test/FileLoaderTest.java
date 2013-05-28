@@ -24,17 +24,15 @@ public class FileLoaderTest {
 		TailContainer<Plane> planes = new TailContainer<Plane>();
 		
 		// Load the file avioes.csv
-		String fileName = "airplanes.csv";
 		try {
-			FileLoader.loadCSV(fileName, planes);
+			planes = FileLoader.loadPlanes("airplanes.csv");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		// Check the singleton for records
 		Plane first = planes.get(0);
-		assertEquals("CSTNA", first.getName());
+		assertEquals("CSTNA", first.getPlate());
 		//assertEquals("CSTNA", first.get(0));
 	}
 	
@@ -43,9 +41,8 @@ public class FileLoaderTest {
 		TailContainer<Airport> airports = new TailContainer<Airport>();
 		
 		// Load the file airports.csv
-		String fileName = "airports.csv";
 		try {
-			FileLoader.loadCSV(fileName, airports);
+			airports = FileLoader.loadAirpors("airports.csv");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +58,7 @@ public class FileLoaderTest {
 	public void testFileNotFound() throws IOException {
 		TailContainer<Airport> airports = new TailContainer<Airport>();
 		String fileName = "idonthinkthereforeidontexist.csv";
-		FileLoader.loadCSV(fileName, airports);
+		airports = FileLoader.loadAirpors(fileName);
 	}
 	
 
