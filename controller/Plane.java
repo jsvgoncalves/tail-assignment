@@ -19,8 +19,7 @@ public class Plane {
 	
 	/** Maintenance cost of the airplane per minute. */
 	private double maintAvgCostMin;
-	private double maintAvgCostTotal = 0;
-	
+
 	/** Average fuel spending per minute */
 	private double fuelAvgCostMin;
 
@@ -38,13 +37,16 @@ public class Plane {
 	/** Sum of total flight time. Does not take into account
 	 * the period between flights */
 	private int totalFlyingTime = 0;
-	
+
 	public Plane(String plate, String name, String type) {
 		this.plate = plate;
 		this.name = name;
 		this.type = type;
 		schedule = new ArrayList<Flight>();
 	}
+
+	private double maintCostTotal;
+
 	
 //	private Plane() {
 //		schedule = new ArrayList<Flight>(0);
@@ -56,36 +58,42 @@ public class Plane {
 	public String getPlate() {
 		return plate;
 	}
+	
 	/**
 	 * @param plate the plate to set
 	 */
 	public void setPlate(String plate) {
 		this.plate = plate;
 	}
+	
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+	
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	/**
 	 * @return the type
 	 */
 	public String getType() {
 		return type;
 	}
+	
 	/**
 	 * @param type the type to set
 	 */
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	/** Average overflight fees per day.
 	 * Only relevant when the aircraft
 	 * performs any flight in each day.
@@ -160,12 +168,12 @@ public class Plane {
 		//  between flights.
 		if(f.isMaintenance()){
 			timeSinceLastMaint = 0;
-			maintAvgCostTotal += f.getArrvTime() - f.getDeptTime();
+//			maintAvgCostTotal += f.getArrvTime() - f.getDeptTime();
+			maintCostTotal += f.getArrvTime() - f.getDeptTime();
 		} else if(schedule.isEmpty()){
 			int addedMinutes = f.getArrvTime() - f.getArrvTime();
 			timeSinceLastMaint += addedMinutes;
-			totalFlyingTime += f.getArrvTime() - f.getDeptTime();
-		} else {
+			totalFlyingTime += f.getArrvTime() - f.getDeptTime();		} else {
 			int addedMinutes = f.getArrvTime() - schedule.get(schedule.size()-1).getArrvTime();
 			timeSinceLastMaint += addedMinutes;
 			totalFlyingTime += f.getArrvTime() - f.getDeptTime();
@@ -174,6 +182,10 @@ public class Plane {
 	}
 	
 	public double getCost() {
+		for (Flight scFlight : schedule) {
+			
+		}
+		
 		return getFuelCost() + getMaintCost() + getAirportCosts();
 	}
 	
@@ -187,8 +199,9 @@ public class Plane {
 	}
 	
 	private double getMaintCost() {
-		return maintAvgCostMin * maintAvgCostTotal;
+		return maintAvgCostMin * maintCostTotal;
 	}
+	
 	public boolean canPerform(Flight flight) {
 		return 
 		schedule.get(schedule.size()).arrvTime + Constraints.MIN_PARKING_TIME < flight.deptTime
