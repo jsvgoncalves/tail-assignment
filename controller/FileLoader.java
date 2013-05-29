@@ -16,7 +16,7 @@ public class FileLoader {
 		try {
 			boolean planes_loaded = loadPlanes("airplanes.csv", planes);
 			boolean airports_loaded = loadAirports("airports.csv", airports);
-			boolean flights_loaded = loadFlights("flights.csv", flights, airports);
+			boolean flights_loaded = loadFlights("flights-treated.csv", flights, airports);
 		} catch (NoSuchFileException e1) {
 			System.err.println("File not found: " + e1.getMessage());
 			System.exit(1);

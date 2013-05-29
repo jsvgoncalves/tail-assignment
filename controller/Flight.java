@@ -21,6 +21,7 @@ public class Flight implements Comparable<Flight>{
 	public int soldEco;
 	
 	public boolean isMaintenance = false;
+	private int duration;
 	
 //	private Flight() {
 //	}
@@ -32,8 +33,8 @@ public class Flight implements Comparable<Flight>{
 		this.dept = dept;
 		this.arrv = arrv;
 		this.planeType = planeType;
-		this.deptTime = deptTime;
-		this.arrvTime = arrvTime;
+		this.setDeptTime(deptTime);
+		this.setArrvTime(arrvTime);
 		this.seatsExc = seatsExc;
 		this.seatsEco = seatsEco;
 		this.soldExc = soldExc;
@@ -63,8 +64,8 @@ public class Flight implements Comparable<Flight>{
 			}
 		}
 		this.planeType = Integer.valueOf(arr.get(3));
-		this.deptTime = util.TimeHelper.getMinutes(arr.get(4));
-		this.arrvTime = util.TimeHelper.getMinutes(arr.get(5));
+		setDeptTime(util.TimeHelper.getMinutes(arr.get(4)));
+		setArrvTime(util.TimeHelper.getMinutes(arr.get(5)));
 		this.seatsExc = Integer.valueOf(arr.get(6));
 		this.seatsEco = Integer.valueOf(arr.get(7));
 		this.soldExc = Integer.valueOf(arr.get(8));
@@ -136,31 +137,33 @@ public class Flight implements Comparable<Flight>{
 	}
 
 	/**
-	 * @return the deptTime
+	 * @return Time in minutes
 	 */
 	public int getDeptTime() {
 		return deptTime;
 	}
 
 	/**
-	 * @param deptTime the deptTime to set
+	 * @param Time in minutes
 	 */
 	public void setDeptTime(int deptTime) {
 		this.deptTime = deptTime;
+		this.duration=  this.arrvTime - this.deptTime;
 	}
 
 	/**
-	 * @return the arrvTime
+	 * @return Time in minutes
 	 */
 	public int getArrvTime() {
 		return arrvTime;
 	}
 
 	/**
-	 * @param arrvTime the arrvTime to set
+	 * @param Time in minutes
 	 */
 	public void setArrvTime(int arrvTime) {
 		this.arrvTime = arrvTime;
+		this.duration=  this.arrvTime - this.deptTime;
 	}
 
 	/**
@@ -227,6 +230,10 @@ public class Flight implements Comparable<Flight>{
 		return "" + this.number + "|" + this.dept.getIataCode() + "|" + this.deptTime + "|" +
 				this.arrv.getIataCode() + "|" + this.arrvTime;
 				
+	}
+
+	public int getDuration() {
+		return this.duration;
 	}
 	
 	

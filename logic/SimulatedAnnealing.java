@@ -26,10 +26,9 @@ public class SimulatedAnnealing {
 //		this.airports = airports;
 //	}
 
-	public void run(TailContainer<Plane> firstSol, int iMax, double cMax) {
+	public double run(TailContainer<Plane> firstSol, int iMax, double cMax) {
 		TailContainer<Plane> sol = firstSol; // current solution
 		double cost = cost(sol); //cost of the current solution
-		System.err.println("imax = " + iMax + " cmax = " + cMax + "§ cost = " + cost);
 		int i = 0;
 
 		// Will stop after i_max iterations
@@ -38,17 +37,25 @@ public class SimulatedAnnealing {
 		while (i < iMax && cost > cMax){
 			// Swap some two planes' flights schedule to
 			//  generate a new schedule:
-			System.err.println("sa: " + i + " " + cost + "§");
 			double t = temperature(i, iMax);
 			swap(sol, t);
 
 			i++;
 		}
+		
+		return cost;
 	}
 
-	private static double probability(double t, double cost, double newCost) {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+	 * Decreases exponentially with time.
+	 * Is bigger when (newcost-cost) is bigger (newcost<cost).
+	 * @param temperature
+	 * @param cost
+	 * @param newCost
+	 * @return
+	 */
+	private static double probability(double temperature, double cost, double newCost) {
+		return temperature*newCost/cost;
 	}
 
 	/**
@@ -66,11 +73,11 @@ public class SimulatedAnnealing {
 							if (pi.compareTo(pj, i, j)) {
 								// Try swap them and validate the result
 								//  to see how it goes.
-								ArrayList<Flight> li = (ArrayList<Flight>) pi.getSchedule().subList(0, i-1);
-								li.addAll(pj.getSchedule().subList(i, pj.getSchedule().size()-1));
+								ArrayList<Flight> li = new ArrayList<Flight>(pi.getSchedule().subList(0, i));
+								li.addAll(pj.getSchedule().subList(j, pj.getSchedule().size()));
 
-								ArrayList<Flight> lj = (ArrayList<Flight>) pj.getSchedule().subList(0, j-1);
-								lj.addAll(pi.getSchedule().subList(i, pi.getSchedule().size()-1));
+								ArrayList<Flight> lj = new ArrayList<Flight>(pj.getSchedule().subList(0, j));
+								lj.addAll(pi.getSchedule().subList(i, pi.getSchedule().size()));
 								// FIXME: is swap always a one-way operation?
 								// or is the algorithm actually doing them both?
 								
@@ -95,8 +102,10 @@ public class SimulatedAnnealing {
 
 									if (p > r.nextDouble()){
 										// accept solution
+										System.out.println("New Solution with cost " + newCost + "§");
+										System.out.println("Probability: " + p);
 										pi.setSchedule(li);
-										pi.setSchedule(lj);
+										pj.setSchedule(lj);
 										pi = piTemp;
 										pj = pjTemp;
 										cost = newCost;
@@ -109,7 +118,6 @@ public class SimulatedAnnealing {
 				}
 			}
 		}
-
 		return -1.0;
 	}
 
@@ -121,7 +129,7 @@ public class SimulatedAnnealing {
 	 */
 	private static boolean validateSchedule(ArrayList<Flight> li) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	/**
@@ -132,15 +140,15 @@ public class SimulatedAnnealing {
 	 * @param iMax
 	 * @return
 	 */
-	private static double temperature(int i, int iMax) {
-		return iMax/i;
+	private static double temperature(double i, double iMax) {
+		return (iMax-i)/iMax;
 	}
 
-	private static double cost(TailContainer<Plane> sol) {
+	public static double cost(TailContainer<Plane> sol) {
 		double cost = 0;
 
 		for (int i = 0; i < sol.size(); i++) {
-			((Plane)sol.get(i)).getCost();
+			cost += sol.get(i).getCost();
 		}
 
 		return cost;

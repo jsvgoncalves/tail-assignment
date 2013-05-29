@@ -38,10 +38,12 @@ public class Plane {
 	 * the period between flights */
 	private int totalFlyingTime = 0;
 
-	public Plane(String plate, String name, String type) {
+	public Plane(String plate, String name, String type, double fuelAvgCostMin, double maintAvgCostMin) {
 		this.plate = plate;
 		this.name = name;
 		this.type = type;
+		this.setFuelAvgCostMin(fuelAvgCostMin);
+		this.setMaintAvgCostMin(maintAvgCostMin);
 		schedule = new ArrayList<Flight>();
 	}
 	
@@ -70,6 +72,7 @@ public class Plane {
 		this.maintAvgCostMin = clone.maintAvgCostMin;
 		this.fuelAvgCostMin = clone.fuelAvgCostMin;
 		this.schedule = schedule;
+		this.totalFlyingTime = clone.totalFlyingTime;
 	}
 
 	private double maintCostTotal;
@@ -149,7 +152,10 @@ public class Plane {
 	 * @param maintAvgCostMin the maintAvgCostMin to set
 	 */
 	public void setMaintAvgCostMin(String maintAvgCostMin) {
-		this.maintAvgCostMin = Integer.valueOf(maintAvgCostMin);
+		setMaintAvgCostMin(Double.valueOf(maintAvgCostMin));
+	}
+	public void setMaintAvgCostMin(double maintAvgCostMin) {
+		this.maintAvgCostMin = maintAvgCostMin;
 	}
 	/**
 	 * @return the fuelAvgCostMin
@@ -161,7 +167,11 @@ public class Plane {
 	 * @param fuelAvgCostMin the fuelAvgCostMin to set
 	 */
 	public void setFuelAvgCostMin(String fuelAvgCostMin) {
-		this.fuelAvgCostMin = Integer.valueOf(fuelAvgCostMin);
+		setFuelAvgCostMin(Integer.valueOf(fuelAvgCostMin));
+	}
+	
+	public void setFuelAvgCostMin(double fuelAvgCostMin) {
+		this.fuelAvgCostMin = fuelAvgCostMin;
 	}
 	
 	public ArrayList<Flight> getSchedule() {
@@ -209,11 +219,12 @@ public class Plane {
 	}
 	
 	public double getCost() {
+		double cost = 0;
 		for (Flight flight : schedule) {
-			//TODO calc cost
+			cost += flight.getDuration()*getFuelCost();
 		}
 		
-		return getFuelCost() + getMaintCost() + getAirportCosts();
+		return cost + getMaintCost() + getAirportCosts();
 	}
 	
 	/**
