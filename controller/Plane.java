@@ -63,6 +63,15 @@ public class Plane {
 		schedule = new ArrayList<Flight>();
 	}
 
+	public Plane(Plane clone, ArrayList<Flight> schedule) {
+		this.plate = clone.plate;
+		this.name = clone.name;
+		this.type = clone.type;
+		this.maintAvgCostMin = clone.maintAvgCostMin;
+		this.fuelAvgCostMin = clone.fuelAvgCostMin;
+		this.schedule = schedule;
+	}
+
 	private double maintCostTotal;
 
 	
@@ -200,8 +209,8 @@ public class Plane {
 	}
 	
 	public double getCost() {
-		for (Flight scFlight : schedule) {
-			
+		for (Flight flight : schedule) {
+			//TODO calc cost
 		}
 		
 		return getFuelCost() + getMaintCost() + getAirportCosts();

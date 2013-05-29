@@ -62,8 +62,9 @@ public class DepthFirstTest {
 		
 		DepthFirst df = new DepthFirst(flights, planes);
 		
+		
 		// The algorithm has a solution 
-		assertTrue("DF falhou", df.run());
+		assertTrue("DF falhou", df.getFirstSol());
 		
 		// Check that the current flights assigned to all the planes
 		// is equal to the total number of flights
