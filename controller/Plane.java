@@ -244,6 +244,15 @@ public class Plane {
 			&& schedule.get(flightIndex1).getDeptTime() - Constraints.MIN_PARKING_TIME
 				> p.schedule.get(flightIndex2 - 1).getDeptTime();
 	}
+
+
+	public void removeFlight(Flight flight) {
+		int lastIndex = this.schedule.size() - 1;
+		this.schedule.remove(lastIndex); 
+		
+		// Verificar se havia uma manutenção e
+		// Verificar o tempo desde manutenções
+	}
 	
 	
 

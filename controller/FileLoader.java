@@ -14,9 +14,9 @@ public class FileLoader {
 							TailContainer<Airport> airports,
 							TailContainer<Flight> flights){
 		try {
-			planes = loadPlanes("airplanes.csv");
-			airports = loadAirpors("airports.csv");
-			flights = loadFlights("flights.csv", airports);
+			boolean planes_loaded = loadPlanes("airplanes.csv", planes);
+			boolean airports_loaded = loadAirports("airports.csv", airports);
+			boolean flights_loaded = loadFlights("flights.csv", flights, airports);
 		} catch (NoSuchFileException e1) {
 			System.err.println("File not found: " + e1.getMessage());
 			System.exit(1);
@@ -48,14 +48,13 @@ public class FileLoader {
 //		return true;
 //	}
 	
-	public static TailContainer<Flight> loadFlights(String fileName, TailContainer<Airport> airports) throws IOException{
+	public static boolean loadFlights(String fileName, TailContainer<Flight> flights, TailContainer<Airport> airports) throws IOException{
 		Path path = Paths.get(fileName);
 		Scanner sc = new Scanner(path);
 		if(sc.hasNextLine()) {
 			sc.nextLine();
 		}
 		
-		 TailContainer<Flight> flights = new TailContainer<Flight>();
 		
 		while(sc.hasNextLine()){
 			// Use split to get the values into an array
@@ -70,17 +69,16 @@ public class FileLoader {
 			}
 		}
 		sc.close();
-		return flights;
+		return true;
 	}
 	
-	public static TailContainer<Plane> loadPlanes(String fileName) throws IOException{
+	public static boolean loadPlanes(String fileName, TailContainer<Plane> planes) throws IOException{
 		Path path = Paths.get(fileName);
 		Scanner sc = new Scanner(path);
 		if(sc.hasNextLine()) {
 			sc.nextLine();
 		}
 		
-		 TailContainer<Plane> planes = new TailContainer<Plane>();
 		
 		while(sc.hasNextLine()){
 			// Use split to get the values into an array
@@ -89,23 +87,25 @@ public class FileLoader {
 			if (fields.length > 1) {
 				// Convert to ArrayList<String> to use Entity interface
 				ArrayList<String> arr = new ArrayList<String>(Arrays.asList(fields));
-				planes.addRecord(new Plane(arr));
+				Plane plane = new Plane(arr);
+//				System.out.println(plane.getName());
+				planes.addRecord(plane);
 			} else {
 				//throw new FileNotFoundException("Error parsing CSV.");
 			}
 		}
 		sc.close();
-		return planes;
+//		System.out.println("size " + planes.size());
+		return true;
 	}
 	
-	public static TailContainer<Airport> loadAirpors(String fileName) throws IOException{
+	public static boolean loadAirports(String fileName, TailContainer<Airport> airports) throws IOException{
 		Path path = Paths.get(fileName);
 		Scanner sc = new Scanner(path);
 		if(sc.hasNextLine()) {
 			sc.nextLine();
 		}
 		
-		TailContainer<Airport> airports = new TailContainer<Airport>();
 		
 		while(sc.hasNextLine()){
 			// Use split to get the values into an array
@@ -120,7 +120,7 @@ public class FileLoader {
 			}
 		}
 		sc.close();
-		return airports;
+		return true;
 	}
 
 }

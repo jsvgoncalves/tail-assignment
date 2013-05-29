@@ -25,7 +25,7 @@ public class FileLoaderTest {
 		
 		// Load the file avioes.csv
 		try {
-			planes = FileLoader.loadPlanes("airplanes.csv");
+			boolean loaded = FileLoader.loadPlanes("airplanes.csv", planes);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class FileLoaderTest {
 		
 		// Load the file airports.csv
 		try {
-			airports = FileLoader.loadAirpors("airports.csv");
+			boolean loaded = FileLoader.loadAirports("airports.csv", airports);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class FileLoaderTest {
 	@Test(expected=NoSuchFileException.class)
 	public void testFileNotFound() throws IOException {
 		String fileName = "idonthinkthereforeidontexist.csv";
-		FileLoader.loadAirpors(fileName);
+		FileLoader.loadAirports(fileName, null);
 	}
 	
 
