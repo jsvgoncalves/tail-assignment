@@ -62,13 +62,13 @@ public class Flight implements Comparable<Flight>{
 				this.arrv = airport;
 			}
 		}
-		this.planeType = Integer.valueOf(arr.get(0));
-		this.deptTime = Integer.valueOf(arr.get(0));
-		this.arrvTime = Integer.valueOf(arr.get(0));
-		this.seatsExc = Integer.valueOf(arr.get(0));
-		this.seatsEco = Integer.valueOf(arr.get(0));
-		this.soldExc = Integer.valueOf(arr.get(0));
-		this.soldEco = Integer.valueOf(arr.get(0));
+		this.planeType = Integer.valueOf(arr.get(3));
+		this.deptTime = util.TimeHelper.getMinutes(arr.get(4));
+		this.arrvTime = util.TimeHelper.getMinutes(arr.get(5));
+		this.seatsExc = Integer.valueOf(arr.get(6));
+		this.seatsEco = Integer.valueOf(arr.get(7));
+		this.soldExc = Integer.valueOf(arr.get(8));
+		this.soldEco = Integer.valueOf(arr.get(9));
 	}
 
 	@Override
@@ -221,6 +221,12 @@ public class Flight implements Comparable<Flight>{
 
 	public boolean isMaintenance() {
 		return isMaintenance;
+	}
+	
+	@Override public String toString() {
+		return "" + this.number + "|" + this.dept.getIataCode() + "|" + this.deptTime + "|" +
+				this.arrv.getIataCode() + "|" + this.arrvTime;
+				
 	}
 	
 	

@@ -34,12 +34,12 @@ public class DepthFirstTest {
 		int t6 = 0;
 		
 		try {
-			t1 = TimeHelper.getMinutes("2013-05-01 06:00");
-			t2 = TimeHelper.getMinutes("2013-05-01 06:30");
-			t3 = TimeHelper.getMinutes("2013-05-01 07:00");
-			t4 = TimeHelper.getMinutes("2013-05-01 07:30");
-			t5 = TimeHelper.getMinutes("2013-05-01 08:00");
-			t6 = TimeHelper.getMinutes("2013-05-01 08:30");
+			t1 = TimeHelper.getMinutes("05/21/2013 06:00");
+			t2 = TimeHelper.getMinutes("05/21/2013 06:30");
+			t3 = TimeHelper.getMinutes("05/21/2013 07:00");
+			t4 = TimeHelper.getMinutes("05/21/2013 07:30");
+			t5 = TimeHelper.getMinutes("05/21/2013 08:00");
+			t6 = TimeHelper.getMinutes("05/21/2013 08:30");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
@@ -94,12 +94,12 @@ public class DepthFirstTest {
 		int t6 = 0;
 		
 		try {
-			t1 = TimeHelper.getMinutes("2013-05-01 06:00");
-			t2 = TimeHelper.getMinutes("2013-05-01 06:30");
-			t3 = TimeHelper.getMinutes("2013-05-01 07:00");
-			t4 = TimeHelper.getMinutes("2013-05-01 07:30");
-			t5 = TimeHelper.getMinutes("2013-05-01 08:00");
-			t6 = TimeHelper.getMinutes("2013-05-01 08:30");
+			t1 = TimeHelper.getMinutes("05/21/2013 06:00");
+			t2 = TimeHelper.getMinutes("05/21/2013 06:30");
+			t3 = TimeHelper.getMinutes("05/21/2013 07:00");
+			t4 = TimeHelper.getMinutes("05/21/2013 07:30");
+			t5 = TimeHelper.getMinutes("05/21/2013 08:00");
+			t6 = TimeHelper.getMinutes("05/21/2013 08:30");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;

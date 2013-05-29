@@ -32,11 +32,18 @@ public class TimeHelper {
 	 * @return Time in minutes since Epoch
 	 * @throws ParseException
 	 */
-	public static int getMinutes(String timestamp) throws ParseException{
-		SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-		Date date = sdf.parse(timestamp);
-		long timeInMillisSinceEpoch = date.getTime();
-		return safeLongToInt(TimeUnit.MILLISECONDS.toMinutes(timeInMillisSinceEpoch));
+	public static int getMinutes(String timestamp){
+		SimpleDateFormat sdf  = new SimpleDateFormat("MM/dd/yyyy kk:mm");
+		Date date;
+		try {
+			date = sdf.parse(timestamp);
+			long timeInMillisSinceEpoch = date.getTime();
+			return safeLongToInt(TimeUnit.MILLISECONDS.toMinutes(timeInMillisSinceEpoch));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	private static int safeLongToInt(long l) {
