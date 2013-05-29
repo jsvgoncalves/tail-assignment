@@ -26,12 +26,12 @@ public class TailContainerTest {
 		int t6 = 0;
 		
 		try {
-			t1 = TimeHelper.getMinutes("2013-05-01 06:00");
-			t2 = TimeHelper.getMinutes("2013-05-01 06:30");
-			t3 = TimeHelper.getMinutes("2013-05-01 07:00");
-			t4 = TimeHelper.getMinutes("2013-05-01 07:30");
-			t5 = TimeHelper.getMinutes("2013-05-01 08:00");
-			t6 = TimeHelper.getMinutes("2013-05-01 08:30");
+			t1 = TimeHelper.getMinutes("05/21/2013 06:00");
+			t2 = TimeHelper.getMinutes("05/21/2013 06:30");
+			t3 = TimeHelper.getMinutes("05/21/2013 07:00");
+			t4 = TimeHelper.getMinutes("05/21/2013 07:30");
+			t5 = TimeHelper.getMinutes("05/21/2013 08:00");
+			t6 = TimeHelper.getMinutes("05/21/2013 08:30");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
@@ -39,20 +39,22 @@ public class TailContainerTest {
 		
 		// *********************** (fNum Dept Arrv Type -Times- -----Seats-------)  
 		Flight flight1 = new Flight(1375, ap1, ap2, 200, t1, t2, 10, 100, 10, 100);
-		Flight flight2 = new Flight(1376, ap2, ap3, 200, t3, t4, 10, 100, 10, 100);
-		Flight flight3 = new Flight(1377, ap1, ap3, 200, t1, t4, 10, 100, 10, 100);
-		Flight flight4 = new Flight(1378, ap3, ap1, 200, t5, t6, 10, 100, 10, 100);
+		Flight flight2 = new Flight(1376, ap2, ap3, 200, t2, t3, 10, 100, 10, 100);
+		Flight flight3 = new Flight(1377, ap1, ap3, 200, t3, t4, 10, 100, 10, 100);
+		Flight flight4 = new Flight(1378, ap3, ap1, 200, t4, t5, 10, 100, 10, 100);
 		
-		flights.addRecord(flight1);
-		flights.addRecord(flight2);
-		flights.addRecord(flight3);
 		flights.addRecord(flight4);
+		flights.addRecord(flight3);
+		flights.addRecord(flight2);
+		flights.addRecord(flight1);
 		
 		flights.sort();
 		
 		assertEquals(1375, flights.get(0).getNumber());
-		assertEquals(1377, flights.get(1).getNumber());
-		assertEquals(1376, flights.get(2).getNumber());
+		assertEquals(1376, flights.get(1).getNumber());
+		assertEquals(1377, flights.get(2).getNumber());
 		assertEquals(1378, flights.get(3).getNumber());
+		
+		assertEquals(30, flights.get(0).getDuration());
 	}
 }

@@ -21,8 +21,8 @@ public class DepthFirstTest {
 
 	@Test
 	public void testPass(){
-		Plane plane1 = new Plane("AAA", "Maria Joana", "200");
-		Plane plane2 = new Plane("BBB", "Manuel Joaquim", "200");
+		Plane plane1 = new Plane("AAA", "Maria Joana", "200", 1.0, 1.0);
+		Plane plane2 = new Plane("BBB", "Manuel Joaquim", "200", 1.0, 1.0);
 		Airport ap1 = new Airport("OPO", 10, 10, 15, 15);
 		Airport ap2 = new Airport("LIS", 13, 13, 18, 18);
 		Airport ap3 = new Airport("FNC", 15, 15, 17, 17);
@@ -62,9 +62,8 @@ public class DepthFirstTest {
 		
 		DepthFirst df = new DepthFirst(flights, planes);
 		
-		
 		// The algorithm has a solution 
-		assertTrue("DF falhou", df.getFirstSol());
+		assertTrue("DF falhou", df.run());
 		
 		// Check that the current flights assigned to all the planes
 		// is equal to the total number of flights
@@ -79,8 +78,8 @@ public class DepthFirstTest {
 	
 	@Test
 	public void testFail(){
-		Plane plane1 = new Plane("AAA", "Maria Joana", "200");
-		Plane plane2 = new Plane("BBB", "Manuel Joaquim", "200");
+		Plane plane1 = new Plane("AAA", "Maria Joana", "200", 1.0, 1.0);
+		Plane plane2 = new Plane("BBB", "Manuel Joaquim", "200", 1.0, 1.0);
 		
 		Airport ap1 = new Airport("OPO", 10, 10, 15, 15);
 		Airport ap2 = new Airport("FNC", 15, 15, 17, 17);

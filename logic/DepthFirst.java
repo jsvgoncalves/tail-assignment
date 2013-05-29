@@ -71,19 +71,4 @@ public class DepthFirst {
 		
 		return availPlanes;
 	}
-	
-	public boolean getFirstSol(){
-		LinkedList<Flight> fs = new LinkedList<Flight>(flights.getRecords()); 
-		for (Plane plane : planes.getRecords()) {
-			for (Iterator<Flight> iterator = fs.iterator(); iterator.hasNext();) {
-				Flight flight = (Flight) iterator.next();
-				if (plane.canPerform(flight)) {
-					plane.update(flight);
-					iterator.remove();
-				}
-			}
-		}
-		System.err.println("Flights left: " + fs.size());
-		return fs.isEmpty();
-	}
 }
