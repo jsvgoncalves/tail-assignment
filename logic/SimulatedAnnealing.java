@@ -39,7 +39,8 @@ public class SimulatedAnnealing {
 			// Swap some two planes' flights schedule to
 			//  generate a new schedule:
 			System.err.println("sa: " + i + " " + cost + "§");
-			TailContainer<Plane> newSol = swap(sol);
+			TailContainer<Plane> newSol = new TailContainer<Plane>(sol);
+			swap(newSol);
 			double newCost = cost(newSol);
 
 			// The temperature value depends on the
@@ -72,7 +73,7 @@ public class SimulatedAnnealing {
 	 * for a possible swap of operation between two planes.
 	 * @return
 	 */
-	public static TailContainer<Plane> swap(TailContainer<Plane> state) {
+	public static boolean swap(TailContainer<Plane> state) {
 		TailContainer<Plane> newState = new TailContainer<Plane>(state);
 		for (Plane pi : newState.getRecords()) {
 			for (Plane pj : newState.getRecords()) {
@@ -83,11 +84,11 @@ public class SimulatedAnnealing {
 							if (pi.compareTo(pj, i, j)) {
 								// Try swap them and validate the result
 								//  to see how it goes.
-								ArrayList<Flight> li = (ArrayList<Flight>) pi.getSchedule().subList(0, i-1);
-								li.addAll(pj.getSchedule().subList(i, pj.getSchedule().size()-1));
+								ArrayList<Flight> li = new ArrayList<Flight>(pi.getSchedule().subList(0, i));
+								li.addAll(pj.getSchedule().subList(j, pj.getSchedule().size()));
 
-								ArrayList<Flight> lj = (ArrayList<Flight>) pj.getSchedule().subList(0, j-1);
-								lj.addAll(pi.getSchedule().subList(i, pi.getSchedule().size()-1));
+								ArrayList<Flight> lj = new ArrayList<Flight>(pj.getSchedule().subList(0, j));
+								lj.addAll(pi.getSchedule().subList(i, pi.getSchedule().size()));
 								// FIXME: is swap always a one-way operation?
 								// or is the algorithm actually doing them both?
 								
@@ -95,7 +96,8 @@ public class SimulatedAnnealing {
 									// This swap was approved.
 									// TAKE IT :D
 									pi.setSchedule(li);
-									pi.setSchedule(lj);
+									pj.setSchedule(lj);
+									return true;
 								}
 							}
 						}
@@ -104,7 +106,7 @@ public class SimulatedAnnealing {
 			}
 		}
 
-		return null;
+		return false;
 	}
 
 	/**
@@ -115,7 +117,7 @@ public class SimulatedAnnealing {
 	 */
 	private static boolean validateSchedule(ArrayList<Flight> li) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	/**
