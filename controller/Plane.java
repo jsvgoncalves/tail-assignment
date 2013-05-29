@@ -191,7 +191,8 @@ public class Plane {
 		} else if(schedule.isEmpty()){
 			int addedMinutes = f.getArrvTime() - f.getArrvTime();
 			timeSinceLastMaint += addedMinutes;
-			totalFlyingTime += f.getArrvTime() - f.getDeptTime();		} else {
+			totalFlyingTime += f.getArrvTime() - f.getDeptTime();		
+		} else {
 			int addedMinutes = f.getArrvTime() - schedule.get(schedule.size()-1).getArrvTime();
 			timeSinceLastMaint += addedMinutes;
 			totalFlyingTime += f.getArrvTime() - f.getDeptTime();
@@ -222,9 +223,9 @@ public class Plane {
 	
 	public boolean canPerform(Flight flight) {
 		return schedule.isEmpty() ||  
-		schedule.get(schedule.size()-1).arrvTime + Constraints.MIN_PARKING_TIME < flight.deptTime
-		&& schedule.get(schedule.size()-1).arrv == flight.dept
-		&& timeSinceLastMaint < Constraints.MAX_TIME_NO_MAINT * MINUTES_IN_A_DAY;
+		(schedule.get(schedule.size()-1).arrvTime + Constraints.MIN_PARKING_TIME < flight.deptTime
+		&& schedule.get(schedule.size()-1).arrv == flight.dept);
+//		&& timeSinceLastMaint < Constraints.MAX_TIME_NO_MAINT * MINUTES_IN_A_DAY;
 	}
 
 	/**

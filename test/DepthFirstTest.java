@@ -68,10 +68,8 @@ public class DepthFirstTest {
 		// Check that the current flights assigned to all the planes
 		// is equal to the total number of flights
 		int numFlights = 0;
-//		System.out.println(planes.getRecords().size());
 		for (Plane plane : planes.getRecords()) {
 			numFlights += plane.getSchedule().size();
-//			System.out.println("numFlights" + numFlights);
 		}
 		
 		assertEquals(flights.size(), numFlights);
@@ -128,10 +126,8 @@ public class DepthFirstTest {
 		// Check that the current flights assigned to all the planes
 		// is equal to the total number of flights
 		int numFlights = 0;
-//		System.out.println(planes.getRecords().size());
 		for (Plane plane : planes.getRecords()) {
 			numFlights += plane.getSchedule().size();
-//			System.out.println(numFlights);
 		}
 		// There should be no flights assigned has we 
 		assertEquals(0, numFlights);
@@ -143,13 +139,20 @@ public class DepthFirstTest {
 		TailContainer<Flight> flights = new TailContainer<Flight>();
 		TailContainer<Airport> airports = new TailContainer<Airport>();
 		FileLoader.loadFiles(planes, airports, flights);
-		
+		int numFlights = flights.size();
 		DepthFirst df = new DepthFirst(flights, planes);
 //		System.out.println("Flights size " + flights.size());
 //		System.out.println("Planes size " + planes.size());
 		
 		// The algorithm has a solution 
 		assertTrue("DF Falhou", df.run());
+		int numFlightsG = 0;
+//		System.out.println(planes.getRecords().size());
+		for (Plane plane : planes.getRecords()) {
+			numFlightsG += plane.getSchedule().size();
+//			System.out.println(numFlights);
+		}
+		assertEquals(numFlights, numFlightsG);
 	}
 
 }
