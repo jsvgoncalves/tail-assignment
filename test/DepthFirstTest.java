@@ -152,7 +152,7 @@ public class DepthFirstTest {
 		}
 		assertEquals(numFlights, numFlightsG);
 		// Save this solution to a file
-		FileExporter.saveFile("initial-solution.csv", planes);
+		FileExporter.saveFile("another-initial-solution.csv", planes);
 	}
 
 }

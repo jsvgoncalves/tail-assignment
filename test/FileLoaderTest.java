@@ -34,6 +34,7 @@ public class FileLoaderTest {
 		
 		Plane first = planes.get(0);
 		assertEquals("CSTNA", first.getPlate());
+		assertEquals("CSTNA", first.getFuelCost());
 		//assertEquals("CSTNA", first.get(0));
 	}
 	

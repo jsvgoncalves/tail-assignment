@@ -60,8 +60,8 @@ public class Plane {
 		this.plate = arr.get(0);
 		this.name = arr.get(1);
 		this.type = arr.get(2);
-		this.maintAvgCostMin = Double.valueOf(arr.get(3));
-		this.fuelAvgCostMin = Double.valueOf(arr.get(4));
+		this.maintAvgCostMin = Double.valueOf(arr.get(4));
+		this.fuelAvgCostMin = Double.valueOf(arr.get(5));
 		schedule = new ArrayList<Flight>();
 	}
 
@@ -161,7 +161,7 @@ public class Plane {
 	 * @return the fuelAvgCostMin
 	 */
 	public double getFuelCost() {
-		return fuelAvgCostMin * totalFlyingTime;
+		return fuelAvgCostMin;
 	}
 	/**
 	 * @param fuelAvgCostMin the fuelAvgCostMin to set
