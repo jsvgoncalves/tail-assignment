@@ -6,6 +6,7 @@ import logic.DepthFirst;
 import org.junit.Before;
 import org.junit.Test;
 
+import util.FileExporter;
 import util.TimeHelper;
 import controller.Airport;
 import controller.FileLoader;
@@ -141,18 +142,17 @@ public class DepthFirstTest {
 		FileLoader.loadFiles(planes, airports, flights);
 		int numFlights = flights.size();
 		DepthFirst df = new DepthFirst(flights, planes);
-//		System.out.println("Flights size " + flights.size());
-//		System.out.println("Planes size " + planes.size());
 		
 		// The algorithm has a solution 
 		assertTrue("DF Falhou", df.run());
 		int numFlightsG = 0;
-//		System.out.println(planes.getRecords().size());
+
 		for (Plane plane : planes.getRecords()) {
 			numFlightsG += plane.getSchedule().size();
-//			System.out.println(numFlights);
 		}
 		assertEquals(numFlights, numFlightsG);
+		// Save this solution to a file
+		FileExporter.saveFile("initial-solution.csv", planes);
 	}
 
 }

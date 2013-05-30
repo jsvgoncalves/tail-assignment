@@ -275,6 +275,18 @@ public class Plane {
 		// Verificar o tempo desde manutenções
 	}
 	
-	
+	@Override public String toString() {
+		//Voo,Origem,Destino,Tipo_Aviao,Partida,Chegada,Lugares_Executiva,Lugares_Economica,Lugares_Exec_Vendidos,Lugares_Econ_Vendidos
+		//208,DKR,LIS,319,9/1/2009 0:35,9/1/2009 4:40,15,110,6,107
+		
+		//Matricula,Nome,Tipo_Aviao,ATC_AVG_COST_DAY,MAINT_AVG_COST_MIN,FUEL_AVG_COST_MIN
+		//CSTNA,GRAO VASCO,320,8570,10.3,16.52
+//		String string = this.plate + "," + this.name + "," + this.type;
+		String string = this.plate;
+		for (Flight flight : schedule) {
+			string += "," + flight.number + "," + flight.deptTime;
+		}
+		return string;
+	}
 
 }
